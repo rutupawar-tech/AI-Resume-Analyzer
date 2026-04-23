@@ -173,7 +173,7 @@ def run():
     img = Image.open('./Logo/RESUME2.png')
     st.image(img, width=700)
     st.sidebar.markdown("# Choose Something...")
-    activities = ["User", "Feedback", "About", "Admin"]
+    activities = ["User", "About", "Admin"]  # "Feedback" - commented out
     choice = st.sidebar.selectbox("Choose among the given options:", activities)
     link = '<b>Built with 🤍 by <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: #021659;">Rutuja Pawar</a></b>' 
     # st.sidebar.markdown(link, unsafe_allow_html=True)
