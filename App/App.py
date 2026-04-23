@@ -1,7 +1,3 @@
-# Developed by dnoobnerd [https://dnoobnerd.netlify.app]    Made with Streamlit
-
-
-###### Packages Used ######
 import streamlit as st # core package used in this project
 import pandas as pd
 import base64, random
@@ -87,12 +83,11 @@ def course_recommender(course_list):
             break
     return rec_course
 
-
 ###### Database Stuffs ######
 
 
 # sql connector
-connection = pymysql.connect(host='localhost',user='root',password='root@MySQL4admin',db='cv')
+connection = pymysql.connect(host='localhost',user='root',password='Rutu@31',db='cv')
 cursor = connection.cursor()
 
 
@@ -130,13 +125,57 @@ st.set_page_config(
 
 def run():
     
+    # Custom CSS for better UI
+    st.markdown("""
+        <style>
+        /* Image styling - remove black background */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* Remove default Streamlit image container styling */
+        [data-testid="stImage"] {
+            display: flex;
+            justify-content: center;
+            background: transparent !important;
+        }
+        
+        [data-testid="stImage"] > img {
+            border: none !important;
+            box-shadow: none !important;
+        }
+        
+        .stButton>button {
+            background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 10px 24px;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .stButton>button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .stTextInput>div>div>input {
+            border-radius: 8px;
+            border: 2px solid #6366f1;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
     # (Logo, Heading, Sidebar etc)
-    img = Image.open('./Logo/RESUM.png')
-    st.image(img)
+    img = Image.open('./Logo/RESUME2.png')
+    st.image(img, width=700)
     st.sidebar.markdown("# Choose Something...")
     activities = ["User", "Feedback", "About", "Admin"]
     choice = st.sidebar.selectbox("Choose among the given options:", activities)
-    link = '<b>Built with 🤍 by <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: #021659;">Deepak Padhi</a></b>' 
+    link = '<b>Built with 🤍 by <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: #021659;">Rutuja Pawar</a></b>' 
     st.sidebar.markdown(link, unsafe_allow_html=True)
     st.sidebar.markdown('''
         <!-- site visitors -->
@@ -652,8 +691,8 @@ def run():
 
         <p align="justify">
             Built with 🤍 by 
-            <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: grey;">Deepak Padhi</a> through 
-            <a href="https://www.linkedin.com/in/mrbriit/" style="text-decoration: none; color: grey;">Dr Bright --(Data Scientist)</a>
+            <a style="text-decoration: none; color: grey;">Rutuja Pawar</a> through 
+            <a style="text-decoration: none; color: grey;">Dr Bright --(Data Scientist)</a>
         </p>
 
         ''',unsafe_allow_html=True)  
@@ -679,7 +718,7 @@ def run():
                 
                 ### Total Users Count with a Welcome Message
                 values = plot_data.Idt.count()
-                st.success("Welcome Deepak ! Total %d " % values + " User's Have Used Our Tool : )")                
+                st.success("Welcome Rutuja ! Total %d " % values + " User's Have Used Our Tool : )")                
                 
                 ### Fetch user data from user_data(table) and convert it into dataframe
                 cursor.execute('''SELECT ID, sec_token, ip_add, act_name, act_mail, act_mob, convert(Predicted_Field using utf8), Timestamp, Name, Email_ID, resume_score, Page_no, pdf_name, convert(User_level using utf8), convert(Actual_skills using utf8), convert(Recommended_skills using utf8), convert(Recommended_courses using utf8), city, state, country, latlong, os_name_ver, host_name, dev_user from user_data''')
